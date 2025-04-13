@@ -1,38 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TripMate - Travel Planner</title>
-  <link rel="stylesheet" href="style.css" />
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""
-  />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripMate – Travel Planner with Map View</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
 <body>
-  <div id="app">
-    <h1>TripMate - Travel Planner</h1>
-    <div id="map"></div>
-    <div id="controls">
-      <input type="text" id="searchInput" placeholder="Search for places..." />
-      <button id="searchBtn">Search</button>
-      <ul id="results"></ul>
+    <div id="map-container">
+        <input id="search-box" type="text" placeholder="Search for places..." />
+        <div id="map"></div>
     </div>
-    <div id="itinerary">
-      <h2>Itinerary</h2>
-      <ul id="itineraryList"></ul>
-      <button id="saveJSON">Save as JSON</button>
-    </div>
-  </div>
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha512-QVn0C2cayujDULPt+8UoElS9dLj9DQGztCzvXvGhST3Fw6nUdsSyQElwrJ+PvPbtzP3d8wH1zjz8eqFVGHunwQ=="
-    crossorigin=""
-  ></script>
-  <script src="app.js"></script>
+    <div id="search-results-container">
+        <h3>Search Results</h3>
+        <ul id="search-results">
+            <!-- Search results will be displayed here -->
+        </ul>
+    </div>
+
+    <div id="itinerary-container">
+        <h3>Your Itinerary</h3>
+        <ul id="itinerary-list">
+            <!-- Itinerary items will appear here -->
+        </ul>
+        <button onclick="exportItinerary()">Export Itinerary</button>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <p id="modal-message"></p>
+            <button id="confirm-button">Yes, Add to Itinerary</button>
+            <button id="cancel-button">Cancel</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script> <!-- Link to external JS file -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtUfGZKSnjGLGBURciHBKL8waeg8U3UDg&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>
