@@ -6,14 +6,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TripMate – Travel Planner</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <h1>🌍 TripMate</h1>
     <input id="search-input" type="text" placeholder="Search for places..." />
-    <button id="export-btn">Export Itinerary as PDF</button>
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider round"></span>
+    </label>
   </header>
 
   <main>
@@ -21,6 +24,7 @@
     <section id="sidebar">
       <h2>Your Itinerary</h2>
       <ul id="itinerary-list"></ul>
+      <button id="export-btn">Export Itinerary as PDF</button>
     </section>
   </main>
 

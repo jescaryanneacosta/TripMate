@@ -20,6 +20,8 @@ function initMap() {
 
     showModal(place);
   });
+
+  enableDragAndDrop();
 }
 
 function showModal(place) {
@@ -39,13 +41,82 @@ function closeModal() {
 }
 
 function addToItinerary(place) {
-  itinerary.push(place);
-
-  const li = document.createElement("li");
-  li.textContent = place.name;
-  document.getElementById("itinerary-list").appendChild(li);
-}
+    const list = document.getElementById("itinerary-list");
+  
+    const li = document.createElement("li");
+    li.setAttribute("draggable", true);
+    li.innerHTML = `
+      <div>
+        <strong>${place.name}</strong>
+        <div class="travel-info"></div>
+      </div>
+      <button>&times;</button>
+    `;
+  
+    li.querySelector("button").onclick = () => {
+      li.remove();
+      itinerary = itinerary.filter(p => p.place_id !== place.place_id);
+    };
+  
+    list.appendChild(li);
+    itinerary.push(place);
+  
+    // Calculate and show travel time/distance if there is a previous place
+    if (itinerary.length > 1) {
+      const origin = itinerary[itinerary.length - 2].geometry.location;
+      const destination = place.geometry.location;
+      const infoDiv = li.querySelector(".travel-info");
+  
+      const service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+        {
+          origins: [origin],
+          destinations: [destination],
+          travelMode: 'DRIVING',
+        },
+        (response, status) => {
+          if (status === 'OK') {
+            const result = response.rows[0].elements[0];
+            infoDiv.textContent = `${result.distance.text} – ${result.duration.text}`;
+          } else {
+            infoDiv.textContent = `Distance info unavailable`;
+          }
+        }
+      );
+    }
+  }
+  
 
 document.getElementById("export-btn").addEventListener("click", () => {
   exportItineraryAsPDF(itinerary);
 });
+
+document.getElementById("theme-toggle").addEventListener("change", function () {
+  document.body.classList.toggle("dark");
+});
+
+function enableDragAndDrop() {
+  const list = document.getElementById("itinerary-list");
+
+  let dragged;
+
+  list.addEventListener("dragstart", (e) => {
+    dragged = e.target;
+    e.target.style.opacity = 0.5;
+  });
+
+  list.addEventListener("dragend", (e) => {
+    e.target.style.opacity = "";
+  });
+
+  list.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  list.addEventListener("drop", (e) => {
+    e.preventDefault();
+    if (e.target.tagName === "LI" && e.target !== dragged) {
+      list.insertBefore(dragged, e.target.nextSibling);
+    }
+  });
+}

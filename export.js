@@ -10,6 +10,6 @@ function exportItineraryAsPDF(itinerary) {
       doc.text(`${index + 1}. ${place.name}`, 20, 40 + index * 10);
     });
   
-    doc.save("itinerary.pdf");
+    doc.save("TripMate_Itinerary.pdf");
   }
   
