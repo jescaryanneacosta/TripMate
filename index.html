@@ -1,44 +1,43 @@
+<!--API Key: AIzaSyDtUfGZKSnjGLGBURciHBKL8waeg8U3UDg-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TripMate – Travel Planner with Map View</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TripMate – Travel Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="map-container">
-        <input id="search-box" type="text" placeholder="Search for places..." />
-        <div id="map"></div>
-    </div>
+  <header>
+    <h1>🌍 TripMate</h1>
+    <input id="search-input" type="text" placeholder="Search for places..." />
+    <button id="export-btn">Export Itinerary as PDF</button>
+  </header>
 
-    <div id="search-results-container">
-        <h3>Search Results</h3>
-        <ul id="search-results">
-            <!-- Search results will be displayed here -->
-        </ul>
-    </div>
+  <main>
+    <div id="map"></div>
+    <section id="sidebar">
+      <h2>Your Itinerary</h2>
+      <ul id="itinerary-list"></ul>
+    </section>
+  </main>
 
-    <div id="itinerary-container">
-        <h3>Your Itinerary</h3>
-        <ul id="itinerary-list">
-            <!-- Itinerary items will appear here -->
-        </ul>
-        <button onclick="exportItinerary()">Export Itinerary</button>
+  <!-- Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <p id="modal-text"></p>
+      <div class="modal-actions">
+        <button id="modal-confirm">Add</button>
+        <button id="modal-cancel">Cancel</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirmation-modal" class="modal">
-        <div class="modal-content">
-            <h2 id="modal-title"></h2>
-            <p id="modal-message"></p>
-            <button id="confirm-button">Yes, Add to Itinerary</button>
-            <button id="cancel-button">Cancel</button>
-        </div>
-    </div>
-
-    <script src="app.js"></script> <!-- Link to external JS file -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtUfGZKSnjGLGBURciHBKL8waeg8U3UDg&libraries=places&callback=initMap" async defer></script>
+  <script src="app.js"></script>
+  <script src="export.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtUfGZKSnjGLGBURciHBKL8waeg8U3UDg&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>
