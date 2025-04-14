@@ -1,7 +1,7 @@
 # TripMate
 TripMate is an interactive travel planning website designed to help users create personalized itineraries with ease. Users can search for places using an integrated Google Maps interface, add locations to their itinerary, and view detailed travel times between destinations. The website includes the following features:
 
-Place Search & Auto-Complete: Search for locations using Google Places, with auto-completion for a smooth user experience.
+<b>Place Search & Auto-Complete: Search for locations using Google Places, with auto-completion for a smooth user experience.
 
 Drag-and-Drop Itinerary: Users can easily reorder destinations in their itinerary by dragging and dropping items, with travel times dynamically updated.
 
